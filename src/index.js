@@ -1,5 +1,5 @@
 if (Number(process.version.slice(1).split(".")[0]) < 16) throw new Error("Node 16.x or higher is required. Update Node on your system.");
-require("dotenv").config();
+require("dotenv").config({ path: "./src/.env" });
 
 const { Client, Collection } = require("discord.js");
 const { intents, partials, permLevels } = require("./config.js");
@@ -13,9 +13,10 @@ class GuideBot extends Client {
 
     this.container = {
       owners: [],
-      commands: new Collection(),
+      contextCommands: new Collection(),
+      legacyCommands: new Collection(),
+      slashCommands: new Collection(),
       aliases: new Collection(),
-      slashcmds: new Collection(),
       events: new Collection(),
       levelCache
     };
@@ -31,9 +32,10 @@ const client = new GuideBot({ intents, partials });
 
 const init = async () => {
 
-  await loadModule(client, "./events", "event");
-  await loadModule(client, "./commands", "command");
-  await loadModule(client, "./slash", "slash");
+  await loadModule(client, "./src/user-interface/context-commands", "context");
+  await loadModule(client, "./src/events", "event");
+  await loadModule(client, "./src/user-interface/legacy-commands", "command");
+  await loadModule(client, "./src/user-interface/slash-commands", "slash");
 
   client.login();
 };

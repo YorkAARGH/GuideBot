@@ -13,21 +13,20 @@ module.exports = class messageCreate extends Event {
 
   async run(message) {
     if (message.author.bot) return;
-
     const settings = message.settings = getSettings(message.guild);
     const prefixMention = new RegExp(`^<@!?${this.client.user.id}> ?$`);
     if (message.content.match(prefixMention)) {
       return message.reply(`My prefix on this guild is \`${settings.prefix}\``);
     }
-
-    if (message.content.startsWith(settings.prefix)) return;
+    
+    if (!message.content.startsWith(settings.prefix)) return;
     const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     if (message.guild && !message.member) await message.guild.members.fetch(message.author);
 
     const level = permLevel(message);
-    const cmd = this.client.container.commands.get(command) || this.client.container.commands.get(this.client.container.aliases.get(command));
+    const cmd = this.client.container.legacyCommands.get(command) || this.client.container.legacyCommands.get(this.client.container.aliases.get(command));
     if (!cmd) return;
 
     if (cmd && !message.guild && cmd.conf.guildOnly)

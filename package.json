@@ -2,9 +2,9 @@
   "name": "guidebot",
   "version": "1.0.0",
   "description": "The utility application featured in An Idiot's Guide.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "engines": {
     "node": ">=16"
@@ -27,8 +27,7 @@
     "colorette": "^1.4.0",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "enmap": "^5.8.6",
-    "inquirer": "^8.0.0"
+    "enmap": "^5.8.6"
   },
   "devDependencies": {
     "eslint": "^7.30.0",

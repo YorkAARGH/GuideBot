@@ -1,9 +1,9 @@
-const Command = require("../base/Command.js");
+const LegacyCommand = require("../../../base/LegacyCommand.js");
 
-const { defaultSettings } = require("../config.js");
-const { settings } = require("../util/settings.js");
+const { defaultSettings } = require("../../../config.js");
+const { settings } = require("../../../util/settings.js");
 
-module.exports = class Reboot extends Command {
+module.exports = class Reboot extends LegacyCommand {
   constructor(client) {
     super(client, {
       name: "reboot",

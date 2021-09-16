@@ -1,4 +1,4 @@
-module.exports = class Command {
+module.exports = class LegacyCommand {
 
   constructor(client, {
     name = null,

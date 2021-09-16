@@ -1,7 +1,7 @@
-const Command = require("../../base/Command.js");
-const { permLevels, defaultSettings } = require("../../config.js");
-const { settings } = require("../../util/settings.js");
-module.exports = class MyLevel extends Command {
+const LegacyCommand = require("../../../base/LegacyCommand.js");
+const { permLevels, defaultSettings } = require("../../../config.js");
+const { settings } = require("../../../util/settings.js");
+module.exports = class MyLevel extends LegacyCommand {
   constructor(client) {
     super(client, {
       name: "mylevel",

@@ -1,4 +1,4 @@
-module.exports = class slashCommand {
+module.exports = class SlashCommand {
 
   constructor(client, {
     name = null,

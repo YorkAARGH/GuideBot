@@ -42,7 +42,7 @@ async function loadModule(client, dir, type, reloaded, reloadedName) {
         if (reloaded === true) {
           if (name !== reloadedName) return; 
         }
-
+        
         const file = new (require(loc))(client);
         logger.log(`Loading ${type}: ${name}. 👌`, "log");  
         file.conf.location = loc;
@@ -50,22 +50,27 @@ async function loadModule(client, dir, type, reloaded, reloadedName) {
         switch (type) {
           case "event": {
             container.events.set(file.conf.name, file);
-            client.on(name, (...args) => file.run(...args));
+            client.on(file.conf.name, (...args) => file.run(...args));
             delete require.cache[require.resolve(loc)];
             break;
           }
-
+          
           case "command": {
             if (file.init) file.init(client);
-            container.commands.set(file.help.name, file);
+            container.legacyCommands.set(file.help.name, file);
             file.conf.aliases.forEach(alias => {
               container.aliases.set(alias, file.help.name);
             });
             break;
           }
-
+          
           case "slash": {
-            container.slashcmds.set(file.commandData.name, file);
+            container.slashCommands.set(file.commandData.name, file);
+            break;
+          }
+          
+          case "context": {
+            container.contextCommands.set(file.commandData.name, file);
             break;
           }
         }

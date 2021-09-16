@@ -1,6 +1,6 @@
-const slashCommand = require("../../base/slashCommand.js");
+const SlashCommand = require("../../../base/SlashCommand.js");
 
-module.exports = class Ping extends slashCommand {
+module.exports = class Ping extends SlashCommand {
 
   constructor(client) {
     super(client, {

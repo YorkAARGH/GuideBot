@@ -1,3 +1,6 @@
+const { getSettings } = require("../util/settings.js");
+const { permLevels } = require("../config.js");
+const { permLevel } = require("../util/functions.js");
 const logger = require("../util/logger.js");
 const Event = require("../base/Event.js");
 
@@ -10,13 +13,24 @@ module.exports = class interactionCreate extends Event {
   
   async run(interaction) {
     if (!interaction.isCommand()) return;
-    const cmd = this.client.container.slashcmds.get(interaction.commandName);
+
+    const settings = interaction.settings = getSettings(interaction.guild);
+
+    const cmd = this.client.container.slashCommands.get(interaction.commandName);
     if (!cmd) return;
 
+    const level = permLevel(interaction);
+    if (level < this.client.container.levelCache[cmd.conf.permLevel]) {
+      return await interaction.reply({
+        content: `This command can only be used by ${cmd.conf.permLevel}'s only`,
+        ephemeral: settings.systemNotice !== "true"
+      });
+    }
+  
     try {
       await cmd.run(interaction);
-      logger.log(`${interaction.user.id} ran slash command ${interaction.commandName}`, "cmd");
-  
+      logger.log(`${permLevels.find(l => l.level === level).name} ${interaction.user.id} ran slash command ${interaction.commandName}`, "cmd");
+    
     } catch (e) {
       console.error(e);
       if (interaction.replied) {

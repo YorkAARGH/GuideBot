@@ -1,9 +1,9 @@
-const slashCommand = require("../../base/slashCommand.js");
+const SlashCommand = require("../../../base/SlashCommand.js");
 const { version } = require("discord.js");
 const { codeBlock } = require("@discordjs/builders");
 const { DurationFormatter } = require("@sapphire/time-utilities");
 const durationFormatter = new DurationFormatter();
-module.exports = class Stats extends slashCommand {
+module.exports = class Stats extends SlashCommand {
 
   constructor(client) {
     super(client, {

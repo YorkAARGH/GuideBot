@@ -1,7 +1,7 @@
 const { Permissions } = require("discord.js");
-const slashCommand = require("../../base/slashCommand.js");
+const SlashCommand = require("../../../base/SlashCommand.js");
 
-module.exports = class Leave extends slashCommand {
+module.exports = class Leave extends SlashCommand {
   constructor(client) {
     super(client, {
       name: "leave",

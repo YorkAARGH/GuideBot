@@ -1,9 +1,9 @@
-const Command = require("../../base/Command.js");
+const LegacyCommand = require("../../../base/LegacyCommand.js");
 const { codeBlock } = require("@discordjs/builders");
-const { settings } = require("../../util/settings.js");
-const { defaultSettings } = require("../../config.js");
+const { settings } = require("../../../util/settings.js");
+const { defaultSettings } = require("../../../config.js");
 
-module.exports = class Conf extends Command {
+module.exports = class Conf extends LegacyCommand {
   constructor(client) {
     super(client, {
       name: "conf",

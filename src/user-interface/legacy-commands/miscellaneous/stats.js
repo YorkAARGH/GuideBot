@@ -1,10 +1,10 @@
-const Command = require("../../base/Command.js");
+const LegacyCommand = require("../../../base/LegacyCommand.js");
 const { version } = require("discord.js");
 const { codeBlock } = require("@discordjs/builders");
 const { DurationFormatter } = require("@sapphire/time-utilities");
 const durationFormatter = new DurationFormatter();
 
-module.exports = class Stats extends Command {
+module.exports = class Stats extends LegacyCommand {
   constructor(client) {
     super(client, {
       name: "stats",

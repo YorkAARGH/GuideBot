@@ -1,9 +1,9 @@
-const Command = require("../../base/Command.js");
-const { unloadModule, loadModule, reloadEvent } = require("../../util/functions.js");
-const { defaultSettings } = require("../../config.js");
-const { settings } = require("../../util/settings.js");
+const LegacyCommand = require("../../../base/LegacyCommand.js");
+const { unloadModule, loadModule, reloadEvent } = require("../../../util/functions.js");
+const { defaultSettings } = require("../../../config.js");
+const { settings } = require("../../../util/settings.js");
 
-module.exports = class Reload extends Command {
+module.exports = class Reload extends LegacyCommand {
   constructor(client) {
     super(client, {
       name: "reload",
